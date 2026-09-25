@@ -138,16 +138,37 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* SECTION 2: LOGO CLOUD MARQUEE STRIP MATCHING RADIUS */}
-      <section className="w-full bg-white border-y border-gray-200/70 py-6 sm:py-8 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-around gap-8 flex-wrap opacity-60 grayscale hover:grayscale-0 transition-all text-xs font-mono font-bold text-gray-800">
-            <span className="flex items-center gap-1.5"><Cpu className="h-4 w-4 text-blue-600" /> WebAssembly Core</span>
-            <span className="flex items-center gap-1.5"><FileText className="h-4 w-4 text-orange-600" /> PDF.js 3.11</span>
-            <span className="flex items-center gap-1.5"><Layers className="h-4 w-4 text-indigo-600" /> pdf-lib Engine</span>
-            <span className="flex items-center gap-1.5"><Sparkles className="h-4 w-4 text-amber-600" /> Tesseract.js OCR</span>
-            <span className="flex items-center gap-1.5"><PenTool className="h-4 w-4 text-emerald-600" /> Perfect-Freehand</span>
-            <span className="flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-cyan-600" /> IndexedDB Sandbox</span>
+      {/* SECTION 2: LOGO CLOUD MARQUEE STRIP (AUTO RUNNING INFINITE TICKER) */}
+      <section className="w-full bg-white border-y border-gray-200/70 py-5 sm:py-6 overflow-hidden relative">
+        {/* Left & Right gradient fade masks */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-white to-transparent z-10" />
+
+        <div className="flex overflow-hidden">
+          <div className="animate-marquee-scroll flex items-center gap-12 sm:gap-16 opacity-75 hover:opacity-100 transition-opacity text-xs sm:text-sm font-mono font-semibold text-neutral-800 shrink-0">
+            {/* Set 1 */}
+            <span className="flex items-center gap-2 shrink-0 hover:text-blue-600 transition-colors cursor-default"><Cpu className="h-4 w-4 text-blue-600" /> WebAssembly Core</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-orange-600 transition-colors cursor-default"><FileText className="h-4 w-4 text-orange-600" /> PDF.js 3.11</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-indigo-600 transition-colors cursor-default"><Layers className="h-4 w-4 text-indigo-600" /> pdf-lib Engine</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-amber-600 transition-colors cursor-default"><Sparkles className="h-4 w-4 text-amber-600" /> Tesseract.js OCR</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-emerald-600 transition-colors cursor-default"><PenTool className="h-4 w-4 text-emerald-600" /> Perfect-Freehand</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-cyan-600 transition-colors cursor-default"><ShieldCheck className="h-4 w-4 text-cyan-600" /> IndexedDB Sandbox</span>
+
+            {/* Set 2 (Seamless loop duplicate) */}
+            <span className="flex items-center gap-2 shrink-0 hover:text-blue-600 transition-colors cursor-default"><Cpu className="h-4 w-4 text-blue-600" /> WebAssembly Core</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-orange-600 transition-colors cursor-default"><FileText className="h-4 w-4 text-orange-600" /> PDF.js 3.11</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-indigo-600 transition-colors cursor-default"><Layers className="h-4 w-4 text-indigo-600" /> pdf-lib Engine</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-amber-600 transition-colors cursor-default"><Sparkles className="h-4 w-4 text-amber-600" /> Tesseract.js OCR</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-emerald-600 transition-colors cursor-default"><PenTool className="h-4 w-4 text-emerald-600" /> Perfect-Freehand</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-cyan-600 transition-colors cursor-default"><ShieldCheck className="h-4 w-4 text-cyan-600" /> IndexedDB Sandbox</span>
+
+            {/* Set 3 (Widescreen smoothness) */}
+            <span className="flex items-center gap-2 shrink-0 hover:text-blue-600 transition-colors cursor-default"><Cpu className="h-4 w-4 text-blue-600" /> WebAssembly Core</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-orange-600 transition-colors cursor-default"><FileText className="h-4 w-4 text-orange-600" /> PDF.js 3.11</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-indigo-600 transition-colors cursor-default"><Layers className="h-4 w-4 text-indigo-600" /> pdf-lib Engine</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-amber-600 transition-colors cursor-default"><Sparkles className="h-4 w-4 text-amber-600" /> Tesseract.js OCR</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-emerald-600 transition-colors cursor-default"><PenTool className="h-4 w-4 text-emerald-600" /> Perfect-Freehand</span>
+            <span className="flex items-center gap-2 shrink-0 hover:text-cyan-600 transition-colors cursor-default"><ShieldCheck className="h-4 w-4 text-cyan-600" /> IndexedDB Sandbox</span>
           </div>
         </div>
       </section>

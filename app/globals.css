@@ -42,6 +42,27 @@ body {
   animation: shimmer-move 2.4s linear infinite;
 }
 
+/* Infinite Marquee Auto-Run Animation */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-scroll {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 22s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-scroll:hover {
+  animation-play-state: paused;
+}
+
 /* Radius Card Utilities */
 .radius-card {
   background-color: var(--card-bg);
