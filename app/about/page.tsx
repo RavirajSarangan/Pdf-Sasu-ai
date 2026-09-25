@@ -36,7 +36,7 @@ export default function AboutPage() {
         </header>
 
         {/* System Visual Story Grid with High-Fidelity Unsplash Imagery */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <article className="group rounded-xl border border-[#e5e5e3] bg-white p-6 sm:p-8 space-y-6 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
@@ -74,6 +74,26 @@ export default function AboutPage() {
             <div className="pt-4 border-t border-[#e5e5e3] flex items-center gap-2 text-xs font-mono text-[#524f49]">
               <Cpu className="h-4 w-4 text-blue-600" />
               <span>Native WebAssembly compilation</span>
+            </div>
+          </article>
+
+          <article className="group rounded-xl border border-[#e5e5e3] bg-white p-6 sm:p-8 space-y-6 flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80"
+                  alt="High-performance network streaming and asynchronous non-blocking event loops"
+                  className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <h2 className="text-xl font-normal text-[#0f0e0d]">Netty.io Reactive Streaming</h2>
+              <p className="text-xs sm:text-sm text-[#524f49] leading-relaxed">
+                For enterprise high-concurrency ingestion and microservice architectures, SASU PDF interfaces with Netty.io event-driven asynchronous pipelines for zero-copy off-heap buffer streaming and multi-gigabyte document processing.
+              </p>
+            </div>
+            <div className="pt-4 border-t border-[#e5e5e3] flex items-center gap-2 text-xs font-mono text-[#524f49]">
+              <Zap className="h-4 w-4 text-amber-600" />
+              <span>Netty.io event-driven streaming</span>
             </div>
           </article>
         </div>

@@ -81,6 +81,35 @@ Unlike traditional cloud PDF converters, **SASU PDF** does not upload documents 
 
 ---
 
+## ⚡ High-Throughput Streaming & Netty.io Backend Architecture (Enterprise Roadmap)
+
+For enterprise on-premises deployments requiring multi-gigabyte document batch ingestion, high-concurrency microservices, and reactive network protocols, SASU PDF's backend pipeline leverages the [Netty.io](https://netty.io/) asynchronous event-driven network application framework.
+
+```mermaid
+flowchart LR
+    subgraph Client [Browser / SASU PDF Client]
+        A[Client WebAssembly Engine] <-->|HTTP/2 & WebSocket Chunked Stream| B[Netty EventLoopGroup]
+    end
+
+    subgraph NettyEngine [High-Performance Netty.io Ingestion Engine]
+        B --> C[ChannelPipeline]
+        C --> D[ByteBuf Zero-Copy Chunk Decoder]
+        D --> E[Non-Blocking Reactive Stream Workers]
+        E --> F[Off-Heap Native Memory Pool]
+    end
+
+    subgraph VectorOutput [Document Processing Target]
+        F --> G[On-Premises Vector Search / Enterprise OCR Cluster]
+    end
+```
+
+### Key Netty.io Pipeline Features:
+- **Zero-Copy `ByteBuf` Slicing**: Direct off-heap byte buffer transfer for ultra-fast multi-gigabyte PDF chunk ingestion without JVM garbage collection pressure.
+- **Asynchronous Non-Blocking Event Loops (`NioEventLoopGroup`)**: Scales to hundreds of thousands of concurrent document streams per node with minimal thread footprint.
+- **Reactive Backpressure Flow Control**: Automatically matches client buffer throughput with internal processing queues to eliminate buffer bloat and connection throttling.
+
+---
+
 ## 💻 Tech Stack
 
 - **Framework**: [Next.js 16 (App Router + Turbopack)](https://nextjs.org/)
@@ -88,6 +117,7 @@ Unlike traditional cloud PDF converters, **SASU PDF** does not upload documents 
 - **PDF Engine**: [PDF.js (`pdfjs-dist`)](https://mozilla.github.io/pdf.js/) for rendering & text extraction
 - **PDF Manipulation**: [pdf-lib](https://pdf-lib.js.org/) for programmatic binary assembly & compilation
 - **OCR Engine**: [Tesseract.js](https://tesseract.projectnaptha.com/) for WASM optical character recognition
+- **High-Throughput Network Streaming (Roadmap)**: [Netty.io](https://netty.io/) asynchronous event-driven network pipeline
 - **Barcode & QR**: `qrcode`, `jsbarcode`
 - **State & Storage**: Client-side React Hooks, IndexedDB / LocalStorage workspace sync
 
