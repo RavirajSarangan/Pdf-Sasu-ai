@@ -1,5 +1,6 @@
 import { StoredDocument } from "@/types/auth";
 import { Annotation, PageMetadata } from "@/types/pdf";
+import { sanitizeFileName } from "@/lib/utils";
 
 const DB_NAME = "pdfforge_db";
 const DB_VERSION = 1;
@@ -29,7 +30,7 @@ function openDb(): Promise<IDBDatabase> {
     };
 
     request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
+    request.onerror = () => reject(request.error || new Error("Failed to open IndexedDB"));
   });
 }
 
@@ -51,14 +52,20 @@ export interface SavedSignature {
 
 export const documentStore = {
   async saveDocument(doc: StoredDocument, rawData?: ArrayBuffer | Uint8Array): Promise<void> {
+    const cleanName = sanitizeFileName(doc.name || "document.pdf");
+    const sanitizedDoc: StoredDocument = {
+      ...doc,
+      name: cleanName,
+    };
+
     try {
       const db = await openDb();
       const tx = db.transaction(DOCS_STORE, "readwrite");
       const store = tx.objectStore(DOCS_STORE);
 
       const toSave = {
-        ...doc,
-        pdfData: rawData || doc.pdfData,
+        ...sanitizedDoc,
+        pdfData: rawData || sanitizedDoc.pdfData,
         updatedAt: Date.now(),
       };
 
@@ -66,13 +73,18 @@ export const documentStore = {
         const req = store.put(toSave);
         req.onsuccess = () => resolve();
         req.onerror = () => reject(req.error);
+        tx.onabort = () => reject(tx.error || new Error("Transaction aborted"));
       });
 
       // Update local storage metadata index
-      this.updateMetadataList(doc);
-    } catch (err) {
-      console.warn("Falling back to localStorage metadata only", err);
-      this.updateMetadataList(doc);
+      this.updateMetadataList(sanitizedDoc);
+    } catch (err: any) {
+      if (err?.name === "QuotaExceededError") {
+        console.error("Storage quota exceeded in IndexedDB", err);
+      } else {
+        console.warn("Falling back to localStorage metadata only", err);
+      }
+      this.updateMetadataList(sanitizedDoc);
     }
   },
 

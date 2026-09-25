@@ -24,13 +24,13 @@ import {
   WatermarkOptions,
   PageNumberOptions,
 } from "@/types/pdf";
-import { hexToRgb } from "@/lib/utils";
+import { hexToRgb, sanitizeForWinAnsi, validatePdfHeader } from "@/lib/utils";
 
 /**
  * Maps standard CSS fonts to pdf-lib StandardFonts
  */
 async function getEmbeddedFont(doc: PDFDocument, fontFamily: string, bold = false, italic = false): Promise<PDFFont> {
-  const fontLower = fontFamily.toLowerCase();
+  const fontLower = (fontFamily || "").toLowerCase();
   
   if (fontLower.includes("times") || fontLower.includes("serif")) {
     if (bold && italic) return await doc.embedFont(StandardFonts.TimesRomanBoldItalic);
@@ -57,7 +57,8 @@ async function getEmbeddedFont(doc: PDFDocument, fontFamily: string, bold = fals
  * Converts data URL (base64) into Uint8Array
  */
 function dataUrlToUint8Array(dataUrl: string): Uint8Array {
-  const base64 = dataUrl.split(",")[1];
+  const parts = (dataUrl || "").split(",");
+  const base64 = parts.length > 1 ? parts[1] : parts[0];
   const binaryString = atob(base64);
   const len = binaryString.length;
   const bytes = new Uint8Array(len);
@@ -81,6 +82,10 @@ export async function exportPdfWithAnnotations({
   annotations: Annotation[];
   metadata?: PDFDocMetadata;
 }): Promise<Uint8Array> {
+  if (!originalPdfBytes || !validatePdfHeader(originalPdfBytes)) {
+    throw new Error("Cannot export: Source is not a valid PDF document");
+  }
+
   // Load original PDF
   const originalDoc = await PDFDocument.load(originalPdfBytes, { ignoreEncryption: true });
   
@@ -89,12 +94,12 @@ export async function exportPdfWithAnnotations({
 
   // Apply Document Metadata if provided
   if (metadata) {
-    if (metadata.title) outDoc.setTitle(metadata.title);
-    if (metadata.author) outDoc.setAuthor(metadata.author);
-    if (metadata.subject) outDoc.setSubject(metadata.subject);
-    if (metadata.keywords) outDoc.setKeywords(metadata.keywords);
-    outDoc.setProducer(metadata.producer || "PDFForge Web Studio (100% Client-Side)");
-    outDoc.setCreator(metadata.creator || "PDFForge");
+    if (metadata.title) outDoc.setTitle(sanitizeForWinAnsi(metadata.title));
+    if (metadata.author) outDoc.setAuthor(sanitizeForWinAnsi(metadata.author));
+    if (metadata.subject) outDoc.setSubject(sanitizeForWinAnsi(metadata.subject));
+    if (metadata.keywords) outDoc.setKeywords(metadata.keywords.map(sanitizeForWinAnsi));
+    outDoc.setProducer(sanitizeForWinAnsi(metadata.producer || "PDFForge Web Studio (100% Client-Side)"));
+    outDoc.setCreator(sanitizeForWinAnsi(metadata.creator || "PDFForge"));
   } else {
     outDoc.setProducer("PDFForge Web Studio (100% Client-Side)");
     outDoc.setCreator("PDFForge");
@@ -169,8 +174,8 @@ async function applyAnnotationToPdfPage(
       if (textAnn.backgroundColor && textAnn.backgroundColor !== "transparent") {
         const bgRgb = hexToRgb(textAnn.backgroundColor);
         page.drawRectangle({
-          x: pdfX,
-          y: pdfY,
+          x: Math.max(0, pdfX),
+          y: Math.max(0, pdfY),
           width: Math.max(annWidth, 30),
           height: Math.max(annHeight, textAnn.fontSize * 1.3),
           color: rgb(bgRgb.r, bgRgb.g, bgRgb.b),
@@ -178,12 +183,13 @@ async function applyAnnotationToPdfPage(
         });
       }
 
-      // Draw each line of text
-      const lines = textAnn.text.split("\n");
-      const fontSize = textAnn.fontSize || 14;
+      // Draw each line of text with safe WinAnsi character encoding
+      const lines = (textAnn.text || "").split("\n");
+      const fontSize = Math.max(6, Math.min(textAnn.fontSize || 14, 200));
       const lineHeight = fontSize * (textAnn.lineHeight || 1.25);
 
-      lines.forEach((line, lineIdx) => {
+      lines.forEach((rawLine, lineIdx) => {
+        const line = sanitizeForWinAnsi(rawLine);
         const textY = pageHeight - canvasY - fontSize - (lineIdx * lineHeight);
         let textX = pdfX;
 
@@ -201,7 +207,7 @@ async function applyAnnotationToPdfPage(
           size: fontSize,
           font: font,
           color: rgb(r, g, b),
-          opacity: textAnn.opacity ?? 1,
+          opacity: Math.max(0, Math.min(1, textAnn.opacity ?? 1)),
         });
       });
       break;
@@ -246,10 +252,10 @@ async function applyAnnotationToPdfPage(
       const fillRgb = hasFill ? hexToRgb(shape.fillColor) : null;
 
       page.drawRectangle({
-        x: pdfX,
-        y: pdfY,
-        width: annWidth,
-        height: annHeight,
+        x: Math.max(0, pdfX),
+        y: Math.max(0, pdfY),
+        width: Math.max(1, annWidth),
+        height: Math.max(1, annHeight),
         borderColor: rgb(strokeRgb.r, strokeRgb.g, strokeRgb.b),
         borderWidth: shape.strokeWidth || 2,
         color: fillRgb ? rgb(fillRgb.r, fillRgb.g, fillRgb.b) : undefined,
@@ -267,8 +273,8 @@ async function applyAnnotationToPdfPage(
       page.drawEllipse({
         x: pdfX + annWidth / 2,
         y: pdfY + annHeight / 2,
-        xScale: annWidth / 2,
-        yScale: annHeight / 2,
+        xScale: Math.max(1, annWidth / 2),
+        yScale: Math.max(1, annHeight / 2),
         borderColor: rgb(strokeRgb.r, strokeRgb.g, strokeRgb.b),
         borderWidth: shape.strokeWidth || 2,
         color: fillRgb ? rgb(fillRgb.r, fillRgb.g, fillRgb.b) : undefined,
@@ -328,13 +334,14 @@ async function applyAnnotationToPdfPage(
       const stamp = ann as StampAnnotation;
       const { r, g, b } = hexToRgb(stamp.color || "#dc2626");
       const font = await doc.embedFont(StandardFonts.HelveticaBold);
+      const safeText = sanitizeForWinAnsi(stamp.stampText || "APPROVED");
 
       // Draw rounded stamp box
       page.drawRectangle({
-        x: pdfX,
-        y: pdfY,
-        width: annWidth,
-        height: annHeight,
+        x: Math.max(0, pdfX),
+        y: Math.max(0, pdfY),
+        width: Math.max(20, annWidth),
+        height: Math.max(10, annHeight),
         borderColor: rgb(r, g, b),
         borderWidth: 3,
         color: rgb(r, g, b),
@@ -343,13 +350,13 @@ async function applyAnnotationToPdfPage(
 
       // Stamp text
       const fontSize = Math.min(annHeight * 0.5, 24);
-      const textWidth = font.widthOfTextAtSize(stamp.stampText, fontSize);
+      const textWidth = font.widthOfTextAtSize(safeText, fontSize);
       const textX = pdfX + (annWidth - textWidth) / 2;
       const textY = pdfY + (annHeight - fontSize) / 2 + 2;
 
-      page.drawText(stamp.stampText, {
-        x: textX,
-        y: textY,
+      page.drawText(safeText, {
+        x: Math.max(0, textX),
+        y: Math.max(0, textY),
         size: fontSize,
         font: font,
         color: rgb(r, g, b),
@@ -365,10 +372,10 @@ async function applyAnnotationToPdfPage(
       const embeddedImage = await doc.embedPng(imageBytes);
 
       page.drawImage(embeddedImage, {
-        x: pdfX,
-        y: pdfY,
-        width: annWidth,
-        height: annHeight,
+        x: Math.max(0, pdfX),
+        y: Math.max(0, pdfY),
+        width: Math.max(5, annWidth),
+        height: Math.max(5, annHeight),
         opacity: sig.opacity ?? 1,
       });
       break;
@@ -387,10 +394,10 @@ async function applyAnnotationToPdfPage(
       }
 
       page.drawImage(embeddedImage, {
-        x: pdfX,
-        y: pdfY,
-        width: annWidth,
-        height: annHeight,
+        x: Math.max(0, pdfX),
+        y: Math.max(0, pdfY),
+        width: Math.max(5, annWidth),
+        height: Math.max(5, annHeight),
         opacity: imgAnn.opacity ?? 1,
       });
       break;
@@ -403,10 +410,10 @@ async function applyAnnotationToPdfPage(
       const embeddedImage = await doc.embedPng(imageBytes);
 
       page.drawImage(embeddedImage, {
-        x: pdfX,
-        y: pdfY,
-        width: annWidth,
-        height: annHeight,
+        x: Math.max(0, pdfX),
+        y: Math.max(0, pdfY),
+        width: Math.max(5, annWidth),
+        height: Math.max(5, annHeight),
         opacity: barcodeAnn.opacity ?? 1,
       });
       break;
@@ -418,24 +425,25 @@ async function applyAnnotationToPdfPage(
 
       // Draw opaque blackout rectangle
       page.drawRectangle({
-        x: pdfX,
-        y: pdfY,
-        width: annWidth,
-        height: annHeight,
+        x: Math.max(0, pdfX),
+        y: Math.max(0, pdfY),
+        width: Math.max(2, annWidth),
+        height: Math.max(2, annHeight),
         color: rgb(fillRgb.r, fillRgb.g, fillRgb.b),
         opacity: 1,
       });
 
       if (redactAnn.overlayText) {
         const font = await doc.embedFont(StandardFonts.HelveticaBold);
+        const safeOverlay = sanitizeForWinAnsi(redactAnn.overlayText);
         const fontSize = Math.min(Math.max(annHeight * 0.45, 8), 14);
-        const textWidth = font.widthOfTextAtSize(redactAnn.overlayText, fontSize);
+        const textWidth = font.widthOfTextAtSize(safeOverlay, fontSize);
         const textX = pdfX + Math.max(0, (annWidth - textWidth) / 2);
         const textY = pdfY + Math.max(0, (annHeight - fontSize) / 2 + 1);
 
-        page.drawText(redactAnn.overlayText, {
-          x: textX,
-          y: textY,
+        page.drawText(safeOverlay, {
+          x: Math.max(0, textX),
+          y: Math.max(0, textY),
           size: fontSize,
           font: font,
           color: rgb(1, 0.2, 0.2), // Red warning text
@@ -450,8 +458,8 @@ async function applyAnnotationToPdfPage(
       const noteRgb = hexToRgb(noteAnn.color || "#fbbf24");
       
       page.drawRectangle({
-        x: pdfX,
-        y: pdfY,
+        x: Math.max(0, pdfX),
+        y: Math.max(0, pdfY),
         width: Math.max(annWidth, 120),
         height: Math.max(annHeight, 80),
         color: rgb(noteRgb.r, noteRgb.g, noteRgb.b),
@@ -462,7 +470,8 @@ async function applyAnnotationToPdfPage(
         const font = await doc.embedFont(StandardFonts.Helvetica);
         const lines = noteAnn.text.split("\n");
         lines.forEach((l, idx) => {
-          page.drawText(l.substring(0, 30), {
+          const safeLine = sanitizeForWinAnsi(l.substring(0, 40));
+          page.drawText(safeLine, {
             x: pdfX + 8,
             y: pdfY + Math.max(annHeight, 80) - 18 - (idx * 14),
             size: 9,
@@ -483,6 +492,7 @@ export async function mergePdfs(pdfBuffers: (Uint8Array | ArrayBuffer)[]): Promi
   const mergedDoc = await PDFDocument.create();
 
   for (const buffer of pdfBuffers) {
+    if (!validatePdfHeader(buffer)) continue;
     const srcDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
     const pageIndices = srcDoc.getPageIndices();
     const copiedPages = await mergedDoc.copyPages(srcDoc, pageIndices);
@@ -502,6 +512,7 @@ export async function splitPdf({
   pdfBytes: Uint8Array | ArrayBuffer;
   pageIndices: number[]; // 0-based
 }): Promise<Uint8Array> {
+  if (!validatePdfHeader(pdfBytes)) throw new Error("Invalid PDF header");
   const srcDoc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
   const newDoc = await PDFDocument.create();
   const copiedPages = await newDoc.copyPages(srcDoc, pageIndices);
@@ -517,6 +528,7 @@ export async function compressPdf(pdfBytes: Uint8Array | ArrayBuffer): Promise<{
   originalSize: number;
   newSize: number;
 }> {
+  if (!validatePdfHeader(pdfBytes)) throw new Error("Invalid PDF header");
   const originalSize = pdfBytes.byteLength;
   const doc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
   
@@ -552,6 +564,7 @@ export async function imagesToPdf({
   };
 
   for (const img of images) {
+    if (!img.dataUrl) continue;
     const imageBytes = dataUrlToUint8Array(img.dataUrl);
     let embeddedImg;
     if (img.dataUrl.includes("image/jpeg") || img.dataUrl.includes("image/jpg")) {
@@ -564,8 +577,8 @@ export async function imagesToPdf({
     let targetHeight: number;
 
     if (pageSize === "Fit") {
-      targetWidth = img.width;
-      targetHeight = img.height;
+      targetWidth = img.width || 595.28;
+      targetHeight = img.height || 841.89;
     } else {
       const [baseW, baseH] = sizes[pageSize] || sizes.A4;
       targetWidth = orientation === "landscape" ? baseH : baseW;
@@ -576,7 +589,7 @@ export async function imagesToPdf({
 
     const availableW = targetWidth - margin * 2;
     const availableH = targetHeight - margin * 2;
-    const imgAspect = img.width / img.height;
+    const imgAspect = (img.width || 1) / (img.height || 1);
     const pageAspect = availableW / availableH;
 
     let drawW: number;
@@ -659,12 +672,12 @@ export function exportProjectJSON({
 }
 
 /**
- * Validate and import a project JSON string
+ * Validate and import a project JSON string safely
  */
 export function importProjectJSON(jsonStr: string): PDFProjectJSON {
   const parsed = JSON.parse(jsonStr);
-  if (!parsed || !Array.isArray(parsed.annotations) || !Array.isArray(parsed.pages)) {
-    throw new Error("Invalid PDFForge project JSON format");
+  if (!parsed || typeof parsed !== "object" || !Array.isArray(parsed.annotations) || !Array.isArray(parsed.pages)) {
+    throw new Error("Invalid PDFForge project JSON structure");
   }
   return parsed as PDFProjectJSON;
 }
@@ -679,6 +692,7 @@ export async function watermarkPdf({
   pdfBytes: Uint8Array | ArrayBuffer;
   options: WatermarkOptions;
 }): Promise<Uint8Array> {
+  if (!validatePdfHeader(pdfBytes)) throw new Error("Invalid PDF header");
   const doc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
   doc.registerFontkit(fontkit);
   const font = await doc.embedFont(StandardFonts.HelveticaBold);
@@ -689,6 +703,7 @@ export async function watermarkPdf({
   const opacity = options.opacity ?? 0.25;
   const rotationDeg = options.rotation ?? 45;
   const watermarkColor = rgb(colorRgb.r, colorRgb.g, colorRgb.b);
+  const safeText = sanitizeForWinAnsi(options.text || "CONFIDENTIAL");
 
   for (let i = 0; i < totalPages; i++) {
     // Check page selection criteria
@@ -698,7 +713,7 @@ export async function watermarkPdf({
 
     const page = doc.getPage(i);
     const { width, height } = page.getSize();
-    const textWidth = font.widthOfTextAtSize(options.text, fontSize);
+    const textWidth = font.widthOfTextAtSize(safeText, fontSize);
     const textHeight = font.heightAtSize(fontSize);
 
     if (options.layout === "tiled") {
@@ -707,7 +722,7 @@ export async function watermarkPdf({
       const stepY = 160;
       for (let x = -width / 2; x < width * 1.5; x += stepX) {
         for (let y = -height / 2; y < height * 1.5; y += stepY) {
-          page.drawText(options.text, {
+          page.drawText(safeText, {
             x,
             y,
             size: fontSize * 0.75,
@@ -723,7 +738,7 @@ export async function watermarkPdf({
       const cx = (width - textWidth) / 2;
       const cy = (height - textHeight) / 2;
 
-      page.drawText(options.text, {
+      page.drawText(safeText, {
         x: cx,
         y: cy,
         size: fontSize,
@@ -748,6 +763,7 @@ export async function addPageNumbersToPdf({
   pdfBytes: Uint8Array | ArrayBuffer;
   options: PageNumberOptions;
 }): Promise<Uint8Array> {
+  if (!validatePdfHeader(pdfBytes)) throw new Error("Invalid PDF header");
   const doc = await PDFDocument.load(pdfBytes, { ignoreEncryption: true });
   const font = await doc.embedFont(StandardFonts.Helvetica);
   const totalPages = doc.getPageCount();
@@ -775,7 +791,8 @@ export async function addPageNumbersToPdf({
       label = `${currentNum}`;
     }
 
-    const textWidth = font.widthOfTextAtSize(label, fontSize);
+    const safeLabel = sanitizeForWinAnsi(label);
+    const textWidth = font.widthOfTextAtSize(safeLabel, fontSize);
     let x = margin;
     let y = margin;
 
@@ -793,7 +810,7 @@ export async function addPageNumbersToPdf({
       y = margin;
     }
 
-    page.drawText(label, {
+    page.drawText(safeLabel, {
       x: Math.max(margin, x),
       y: Math.max(margin, y),
       size: fontSize,

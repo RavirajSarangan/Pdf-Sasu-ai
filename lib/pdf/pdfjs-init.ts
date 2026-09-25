@@ -1,3 +1,5 @@
+import { validatePdfHeader } from "@/lib/utils";
+
 /**
  * Client-side PDF.js initialisation and helpers.
  */
@@ -24,17 +26,41 @@ export async function getPdfjs() {
   return pdfjs;
 }
 
+const MAX_PDF_SIZE_BYTES = 150 * 1024 * 1024; // 150MB security threshold
+
 export async function loadPdfDocument(data: ArrayBuffer | Uint8Array | string) {
   const pdfjs = await getPdfjs();
   if (!pdfjs) throw new Error("PDF.js cannot run on server");
 
   let loadingTask;
   if (typeof data === "string") {
-    loadingTask = pdfjs.getDocument(data);
+    loadingTask = pdfjs.getDocument({
+      url: data,
+      enableScripting: false,
+      isEvalSupported: false,
+      stopAtErrors: false,
+    });
   } else {
-    // Copy the ArrayBuffer/Uint8Array to prevent detached buffer errors
+    // Buffer validation and size check
     const uint8 = data instanceof Uint8Array ? data : new Uint8Array(data);
-    loadingTask = pdfjs.getDocument({ data: uint8.slice() });
+    
+    if (uint8.byteLength > MAX_PDF_SIZE_BYTES) {
+      throw new Error(`PDF exceeds maximum safe file size (${Math.round(MAX_PDF_SIZE_BYTES / (1024 * 1024))}MB)`);
+    }
+
+    if (!validatePdfHeader(uint8)) {
+      throw new Error("Invalid file format: Not a valid PDF document header");
+    }
+
+    // Copy the ArrayBuffer/Uint8Array to prevent detached buffer errors
+    loadingTask = pdfjs.getDocument({
+      data: uint8.slice(),
+      enableScripting: false,
+      isEvalSupported: false,
+      stopAtErrors: false,
+      disableAutoFetch: true,
+      disableStream: true,
+    });
   }
 
   return await loadingTask.promise;
