@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📄 PDFForge — Browser-Native PDF Studio & AI Suite
+# 📄 SASU PDF — Browser-Native PDF Studio & AI Suite
 
 **A high-performance, 100% client-side PDF editing studio with in-place text modification, OCR, digital signatures, vector annotations, and document manipulation tools.**
 
@@ -77,7 +77,7 @@ graph TD
 ```
 
 ### 🔒 Privacy Guarantee
-Unlike traditional cloud PDF converters, **PDFForge** does not upload documents to any remote server or third-party endpoint. Rendering and modifications are handled client-side using WebAssembly and Web Workers.
+Unlike traditional cloud PDF converters, **SASU PDF** does not upload documents to any remote server or third-party endpoint. Rendering and modifications are handled client-side using WebAssembly and Web Workers.
 
 ---
 

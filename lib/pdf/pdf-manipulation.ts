@@ -98,11 +98,11 @@ export async function exportPdfWithAnnotations({
     if (metadata.author) outDoc.setAuthor(sanitizeForWinAnsi(metadata.author));
     if (metadata.subject) outDoc.setSubject(sanitizeForWinAnsi(metadata.subject));
     if (metadata.keywords) outDoc.setKeywords(metadata.keywords.map(sanitizeForWinAnsi));
-    outDoc.setProducer(sanitizeForWinAnsi(metadata.producer || "PDFForge Web Studio (100% Client-Side)"));
-    outDoc.setCreator(sanitizeForWinAnsi(metadata.creator || "PDFForge"));
+    outDoc.setProducer(sanitizeForWinAnsi(metadata.producer || "SASU PDF Web Studio (100% Client-Side)"));
+    outDoc.setCreator(sanitizeForWinAnsi(metadata.creator || "SASU PDF"));
   } else {
-    outDoc.setProducer("PDFForge Web Studio (100% Client-Side)");
-    outDoc.setCreator("PDFForge");
+    outDoc.setProducer("SASU PDF Web Studio (100% Client-Side)");
+    outDoc.setCreator("SASU PDF");
   }
 
   // Filter out deleted pages and sort by their new order
@@ -659,7 +659,7 @@ export function exportProjectJSON({
 }): string {
   const project: PDFProjectJSON = {
     version: "1.0",
-    generator: "PDFForge",
+    generator: "SASU PDF",
     documentName,
     fileSizeBytes,
     createdAt: Date.now(),

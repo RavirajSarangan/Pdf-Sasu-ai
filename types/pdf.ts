@@ -182,7 +182,7 @@ export interface PDFDocMetadata {
 
 export interface PDFProjectJSON {
   version: '1.0';
-  generator: 'PDFForge';
+  generator: 'SASU PDF' | 'PDFForge' | string;
   documentName: string;
   fileSizeBytes: number;
   createdAt: number;

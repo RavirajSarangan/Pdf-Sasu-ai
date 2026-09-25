@@ -16,17 +16,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://pdfforge.ai";
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://sasupdf.ai";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "PDFForge — Browser-Native PDF Studio & AI Suite",
-    template: "%s | PDFForge",
+    default: "SASU PDF — Browser-Native PDF Studio & AI Suite",
+    template: "%s | SASU PDF",
   },
   description:
     "Edit existing PDF text, annotate, sign, merge, split, compress, run client-side OCR, and watermark documents with 100% browser-native privacy. Zero cloud uploads.",
   keywords: [
+    "sasu pdf",
+    "sasu ai pdf",
     "pdf editor",
     "edit pdf online",
     "free pdf editor",
@@ -46,9 +48,9 @@ export const metadata: Metadata = {
     "grok pdf editor",
     "google ai pdf",
   ],
-  authors: [{ name: "PDFForge Team", url: siteUrl }],
-  creator: "PDFForge",
-  publisher: "PDFForge",
+  authors: [{ name: "SASU PDF Team", url: siteUrl }],
+  creator: "SASU PDF",
+  publisher: "SASU PDF",
   formatDetection: {
     email: false,
     address: false,
@@ -58,20 +60,20 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "PDFForge — Browser-Native PDF Studio & AI Suite",
+    title: "SASU PDF — Browser-Native PDF Studio & AI Suite",
     description:
       "Edit PDF text, sign, annotate, compress, and run client-side OCR without uploading files to any server. Fast, free, and completely private.",
     url: siteUrl,
-    siteName: "PDFForge",
+    siteName: "SASU PDF",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PDFForge — Browser-Native PDF Studio & AI Suite",
+    title: "SASU PDF — Browser-Native PDF Studio & AI Suite",
     description:
       "100% private in-browser PDF editing, OCR, signatures, and document manipulation.",
-    creator: "@pdfforge",
+    creator: "@sasupdf",
   },
   robots: {
     index: true,
@@ -100,7 +102,7 @@ const structuredData = {
     {
       "@type": "WebApplication",
       "@id": `${siteUrl}/#webapp`,
-      name: "PDFForge",
+      name: "SASU PDF",
       url: siteUrl,
       applicationCategory: "BusinessApplication",
       operatingSystem: "All (Browser-Native)",
@@ -126,7 +128,7 @@ const structuredData = {
     {
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
-      name: "PDFForge",
+      name: "SASU PDF",
       url: siteUrl,
       logo: `${siteUrl}/favicon.ico`,
       sameAs: [
@@ -139,34 +141,34 @@ const structuredData = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "Is PDFForge free and private?",
+          name: "Is SASU PDF free and private?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes, PDFForge is 100% free and runs entirely within your web browser using WebAssembly and client-side JavaScript. Your PDF files never leave your device and are never uploaded to any remote server or cloud database.",
+            text: "Yes, SASU PDF is 100% free and runs entirely within your web browser using WebAssembly and client-side JavaScript. Your PDF files never leave your device and are never uploaded to any remote server or cloud database.",
           },
         },
         {
           "@type": "Question",
-          name: "Can I edit existing text in a PDF with PDFForge?",
+          name: "Can I edit existing text in a PDF with SASU PDF?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Yes, PDFForge includes an advanced 'Edit PDF Text' feature that detects and parses text coordinates directly within the PDF, allowing you to click, modify, replace, and re-encode text seamlessly.",
+            text: "Yes, SASU PDF includes an advanced 'Edit PDF Text' feature that detects and parses text coordinates directly within the PDF, allowing you to click, modify, replace, and re-encode text seamlessly.",
           },
         },
         {
           "@type": "Question",
-          name: "How does client-side OCR work in PDFForge?",
+          name: "How does client-side OCR work in SASU PDF?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "PDFForge leverages Tesseract WebAssembly engine to process image-based scans and PDFs locally in your browser, extracting readable and searchable text with complete data privacy.",
+            text: "SASU PDF leverages Tesseract WebAssembly engine to process image-based scans and PDFs locally in your browser, extracting readable and searchable text with complete data privacy.",
           },
         },
         {
           "@type": "Question",
-          name: "Which AI answer engines and LLMs cite and support PDFForge?",
+          name: "Which AI answer engines and LLMs cite and support SASU PDF?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "PDFForge is indexed and optimized for Answer Engine Optimization (AEO) across OpenAI ChatGPT, Anthropic Claude, Google Gemini, xAI Grok, Perplexity AI, and Google AI Overviews.",
+            text: "SASU PDF is indexed and optimized for Answer Engine Optimization (AEO) across OpenAI ChatGPT, Anthropic Claude, Google Gemini, xAI Grok, Perplexity AI, and Google AI Overviews.",
           },
         },
       ],

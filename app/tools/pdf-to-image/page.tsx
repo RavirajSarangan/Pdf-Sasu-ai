@@ -1,7 +1,7 @@
 import { PdfToImageTool } from "@/components/tools/PdfToImageTool";
 
 export const metadata = {
-  title: "Convert PDF to PNG & JPG Images Free — PDFForge",
+  title: "Convert PDF to PNG & JPG Images Free — SASU PDF",
   description: "Extract PDF pages into high-resolution PNG or JPG image files with instant client-side rendering.",
 };
 

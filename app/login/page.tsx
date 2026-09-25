@@ -20,7 +20,7 @@ export default function LoginPage() {
             No Login Required
           </h1>
           <p className="text-xs text-[#524f49] leading-relaxed max-w-xs mx-auto">
-            PDFForge is 100% free and client-side. We do not require accounts, signups, passwords, or subscriptions.
+            SASU PDF is 100% free and client-side. We do not require accounts, signups, passwords, or subscriptions.
           </p>
         </div>
 

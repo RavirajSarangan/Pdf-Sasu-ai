@@ -16,7 +16,7 @@ export default function ForgotPasswordPage() {
             No Password Required
           </h1>
           <p className="text-xs text-[#524f49] leading-relaxed max-w-xs mx-auto">
-            PDFForge does not use passwords or user accounts. You can use all PDF tools freely anytime directly in your browser.
+            SASU PDF does not use passwords or user accounts. You can use all PDF tools freely anytime directly in your browser.
           </p>
         </div>
 

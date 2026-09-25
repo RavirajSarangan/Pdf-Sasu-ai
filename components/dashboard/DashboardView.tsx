@@ -91,7 +91,7 @@ export function DashboardView() {
         };
 
         await documentStore.saveDocument(newDoc, buffer);
-        success("Document Saved", "Opening in PDFForge Studio...");
+        success("Document Saved", "Opening in SASU PDF Studio...");
         router.push(`/editor?id=${id}`);
       }
     };
@@ -235,7 +235,7 @@ export function DashboardView() {
             </div>
 
             <p className="text-xs text-[#524f49] leading-relaxed">
-              Every document rendered in PDFForge executes strictly in memory inside your browser. No files, metadata, or telemetry are ever transmitted to any remote cloud servers.
+              Every document rendered in SASU PDF executes strictly in memory inside your browser. No files, metadata, or telemetry are ever transmitted to any remote cloud servers.
             </p>
           </div>
 

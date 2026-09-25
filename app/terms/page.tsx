@@ -3,8 +3,8 @@ import Link from "next/link";
 import { FileCheck, Shield, CheckCircle2 } from "lucide-react";
 
 export const metadata = {
-  title: "Terms of Service — PDFForge",
-  description: "Terms and conditions governing the use of the PDFForge browser-native document suite.",
+  title: "Terms of Service — SASU PDF",
+  description: "Terms and conditions governing the use of the SASU PDF browser-native document suite.",
 };
 
 export default function TermsPage() {
@@ -19,7 +19,7 @@ export default function TermsPage() {
             Terms of service
           </h1>
           <p className="col-span-12 text-sm leading-normal text-[#524f49] sm:text-base md:col-span-6 md:col-start-7">
-            Clear, transparent, and fair terms for using PDFForge's client-side suite. Free to use with zero hidden export watermarks or lock-in.
+            Clear, transparent, and fair terms for using SASU PDF's client-side suite. Free to use with zero hidden export watermarks or lock-in.
           </p>
         </header>
 
@@ -44,28 +44,28 @@ export default function TermsPage() {
             <section className="space-y-2">
               <h2 className="text-base font-medium text-[#0f0e0d]">1. Acceptance of Terms</h2>
               <p>
-                By accessing and using PDFForge, you agree to these Terms of Service. If you do not agree, you should refrain from using the application.
+                By accessing and using SASU PDF, you agree to these Terms of Service. If you do not agree, you should refrain from using the application.
               </p>
             </section>
 
             <section className="space-y-2">
               <h2 className="text-base font-medium text-[#0f0e0d]">2. Document Ownership & Intellectual Property</h2>
               <p>
-                You retain complete, unencumbered ownership and all copyright rights over any documents, files, images, vector strokes, signatures, and annotations created or modified with PDFForge. PDFForge claims zero rights over your processed files.
+                You retain complete, unencumbered ownership and all copyright rights over any documents, files, images, vector strokes, signatures, and annotations created or modified with SASU PDF. SASU PDF claims zero rights over your processed files.
               </p>
             </section>
 
             <section className="space-y-2">
               <h2 className="text-base font-medium text-[#0f0e0d]">3. Local Execution & Liability</h2>
               <p>
-                PDFForge executes entirely on your device's browser runtime. We do not maintain copies of your files. Consequently, you are responsible for maintaining backups of your original documents prior to performing destructive operations like page deletion or redaction.
+                SASU PDF executes entirely on your device's browser runtime. We do not maintain copies of your files. Consequently, you are responsible for maintaining backups of your original documents prior to performing destructive operations like page deletion or redaction.
               </p>
             </section>
 
             <section className="space-y-2">
               <h2 className="text-base font-medium text-[#0f0e0d]">4. Acceptable Use</h2>
               <p>
-                You agree not to use PDFForge to forge fraudulent documents or create malicious payloads designed to exploit vulnerabilities in legacy PDF viewers.
+                You agree not to use SASU PDF to forge fraudulent documents or create malicious payloads designed to exploit vulnerabilities in legacy PDF viewers.
               </p>
             </section>
           </div>

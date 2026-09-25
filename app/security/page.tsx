@@ -14,8 +14,8 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Security & Privacy Architecture — PDFForge",
-  description: "Explore the air-gapped technical security architecture and cryptographic sandbox that keeps your documents private in PDFForge.",
+  title: "Security & Privacy Architecture — SASU PDF",
+  description: "Explore the air-gapped technical security architecture and cryptographic sandbox that keeps your documents private in SASU PDF.",
 };
 
 export default function SecurityPage() {
@@ -30,7 +30,7 @@ export default function SecurityPage() {
             Air-gapped security by architecture
           </h1>
           <p className="col-span-12 text-sm leading-normal text-[#524f49] sm:text-base md:col-span-6 md:col-start-7">
-            PDFForge doesn't just promise privacy through legal policies—we enforce it through physical architectural isolation: 100% client-side WebAssembly execution with zero server intermediaries.
+            SASU PDF doesn't just promise privacy through legal policies—we enforce it through physical architectural isolation: 100% client-side WebAssembly execution with zero server intermediaries.
           </p>
         </header>
 
@@ -94,7 +94,7 @@ export default function SecurityPage() {
             </div>
             <h3 className="text-lg font-normal text-[#0f0e0d]">Zero Remote Proxies</h3>
             <p className="text-xs text-[#524f49] leading-relaxed">
-              Unlike cloud services that proxy your files to remote backends for processing, PDFForge has zero document upload APIs or external storage buckets.
+              Unlike cloud services that proxy your files to remote backends for processing, SASU PDF has zero document upload APIs or external storage buckets.
             </p>
           </div>
 

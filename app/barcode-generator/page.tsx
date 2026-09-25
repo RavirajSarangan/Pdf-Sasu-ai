@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { BarcodeTool } from "@/components/tools/BarcodeTool";
 
 export const metadata: Metadata = {
-  title: "Free QR Code & Barcode Generator | PDFForge",
+  title: "Free QR Code & Barcode Generator | SASU PDF",
   description: "Create scannable 2D QR codes and enterprise 1D Barcodes (Code128, EAN13, UPC, Code39) with custom colors and instant download.",
 };
 

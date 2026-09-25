@@ -37,9 +37,9 @@ export function DocMetadataModal({
   const [activeTab, setActiveTab] = useState<"metadata" | "json">("metadata");
 
   const [title, setTitle] = useState(metadata.title || documentTitle.replace(/\.pdf$/i, ""));
-  const [author, setAuthor] = useState(metadata.author || "PDFForge User");
+  const [author, setAuthor] = useState(metadata.author || "SASU PDF User");
   const [subject, setSubject] = useState(metadata.subject || "");
-  const [keywordsStr, setKeywordsStr] = useState((metadata.keywords || ["PDFForge", "Document"]).join(", "));
+  const [keywordsStr, setKeywordsStr] = useState((metadata.keywords || ["SASU PDF", "Document"]).join(", "));
 
   const handleSaveMetadata = () => {
     const updated: PDFDocMetadata = {

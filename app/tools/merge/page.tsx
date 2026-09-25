@@ -1,7 +1,7 @@
 import { MergePdfTool } from "@/components/tools/MergePdfTool";
 
 export const metadata = {
-  title: "Merge PDF Files Online Free — PDFForge",
+  title: "Merge PDF Files Online Free — SASU PDF",
   description: "Combine multiple PDF documents into one single file directly in your browser with zero server uploads.",
 };
 

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Online PDF Editor Free — PDFForge",
+  title: "Online PDF Editor Free — SASU PDF",
   description: "Free visual PDF editor with text editing, highlights, signatures, page reorganization, and download.",
 };
 

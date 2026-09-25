@@ -18,7 +18,7 @@ export default function ContactPage() {
     e.preventDefault();
     if (!name || !email || !message) return;
     setSubmitted(true);
-    success("Message Received", "Thank you for reaching out to the PDFForge team.");
+    success("Message Received", "Thank you for reaching out to the SASU PDF team.");
   };
 
   return (
@@ -29,7 +29,7 @@ export default function ContactPage() {
         <header className="grid grid-cols-12 gap-x-4 gap-y-4 sm:gap-x-6 md:gap-x-8 pb-12 border-b border-[#e5e5e3]">
           <p className="col-span-12 text-xs font-mono uppercase tracking-wider text-[#524f49]">Contact & Advisory</p>
           <h1 className="col-span-12 text-3xl font-normal leading-[1.1] tracking-[-0.02em] text-[#0f0e0d] sm:text-4xl md:col-span-6 md:text-5xl lg:text-[3.2rem]">
-            Get in touch with<br />the PDFForge team
+            Get in touch with<br />the SASU PDF team
           </h1>
           <p className="col-span-12 text-sm leading-normal text-[#524f49] sm:text-base md:col-span-6 md:col-start-7">
             Have questions about client-side document processing, enterprise self-hosting, custom tool integrations, or feedback on our visual editor? We're here to help.
@@ -42,7 +42,7 @@ export default function ContactPage() {
             <div className="space-y-3">
               <h2 className="text-xl font-normal text-[#0f0e0d]">Enterprise & Community</h2>
               <p className="text-xs sm:text-sm text-[#524f49] leading-relaxed">
-                PDFForge is built for high-performance engineering teams, legal departments, and creators who need fast, zero-leak PDF manipulation.
+                SASU PDF is built for high-performance engineering teams, legal departments, and creators who need fast, zero-leak PDF manipulation.
               </p>
             </div>
 

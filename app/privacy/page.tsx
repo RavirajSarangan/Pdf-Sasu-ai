@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ShieldCheck, Lock, EyeOff, ServerOff, CheckCircle2, ArrowRight } from "lucide-react";
 
 export const metadata = {
-  title: "Privacy Policy — PDFForge Zero-Server Privacy",
-  description: "Learn how PDFForge protects your confidentiality by executing all PDF rendering, editing, and conversion locally in your browser memory.",
+  title: "Privacy Policy — SASU PDF Zero-Server Privacy",
+  description: "Learn how SASU PDF protects your confidentiality by executing all PDF rendering, editing, and conversion locally in your browser memory.",
 };
 
 export default function PrivacyPolicyPage() {
@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
             Zero-server privacy policy
           </h1>
           <p className="col-span-12 text-sm leading-normal text-[#524f49] sm:text-base md:col-span-6 md:col-start-7">
-            PDFForge is engineered around a zero-knowledge, client-side processing model. We do not upload, read, store, or sell any document data or personal information.
+            SASU PDF is engineered around a zero-knowledge, client-side processing model. We do not upload, read, store, or sell any document data or personal information.
           </p>
         </header>
 
@@ -29,7 +29,7 @@ export default function PrivacyPolicyPage() {
             <Lock className="w-4 h-4" /> CORE ARCHITECTURAL COMMITMENT
           </div>
           <p className="text-xs sm:text-sm text-white/80 leading-relaxed max-w-4xl">
-            <strong>PDFForge does not upload, read, store, or transmit the contents of your PDF files to external servers.</strong> All document parsing, rendering, text editing, vector drawing, signatures, and file exports are executed locally inside your web browser’s memory sandbox using WebAssembly and PDF.js.
+            <strong>SASU PDF does not upload, read, store, or transmit the contents of your PDF files to external servers.</strong> All document parsing, rendering, text editing, vector drawing, signatures, and file exports are executed locally inside your web browser’s memory sandbox using WebAssembly and PDF.js.
           </p>
         </div>
 
@@ -54,7 +54,7 @@ export default function PrivacyPolicyPage() {
             <section className="space-y-2">
               <h2 className="text-base font-medium text-[#0f0e0d]">1. Document Processing</h2>
               <p>
-                When you load a PDF into PDFForge, the file bytes are read directly into your browser's JavaScript / WebAssembly runtime heap. No HTTP payloads containing document contents are ever transmitted to any remote servers, cloud functions, or external AI APIs.
+                When you load a PDF into SASU PDF, the file bytes are read directly into your browser's JavaScript / WebAssembly runtime heap. No HTTP payloads containing document contents are ever transmitted to any remote servers, cloud functions, or external AI APIs.
               </p>
             </section>
 
@@ -68,14 +68,14 @@ export default function PrivacyPolicyPage() {
             <section className="space-y-2">
               <h2 className="text-base font-medium text-[#0f0e0d]">3. Optical Character Recognition (OCR)</h2>
               <p>
-                OCR capabilities in PDFForge are powered by a compiled WebAssembly port of Tesseract.js running in a local WebWorker thread. Image analysis occurs exclusively on your device's CPU.
+                OCR capabilities in SASU PDF are powered by a compiled WebAssembly port of Tesseract.js running in a local WebWorker thread. Image analysis occurs exclusively on your device's CPU.
               </p>
             </section>
 
             <section className="space-y-2">
               <h2 className="text-base font-medium text-[#0f0e0d]">4. Regulatory Compliance</h2>
               <p>
-                Because PDFForge never processes or stores personal data on external infrastructure, usage of the platform naturally complies with GDPR, HIPAA, and SOC 2 data boundary requirements.
+                Because SASU PDF never processes or stores personal data on external infrastructure, usage of the platform naturally complies with GDPR, HIPAA, and SOC 2 data boundary requirements.
               </p>
             </section>
           </div>

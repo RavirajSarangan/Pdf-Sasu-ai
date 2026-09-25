@@ -36,7 +36,7 @@ export default function EditorPage() {
     <Suspense
       fallback={
         <div className="h-screen flex items-center justify-center bg-white text-sm text-neutral-500 font-medium">
-          Loading PDFForge Studio...
+          Loading SASU PDF Studio...
         </div>
       }
     >

@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "About PDFForge — The Browser-Native PDF Studio",
-  description: "Learn about the mission, engineering principles, and client-side WebAssembly architecture behind PDFForge.",
+  title: "About SASU PDF — The Browser-Native PDF Studio",
+  description: "Learn about the mission, engineering principles, and client-side WebAssembly architecture behind SASU PDF.",
 };
 
 export default function AboutPage() {
@@ -31,7 +31,7 @@ export default function AboutPage() {
             Built for privacy,<br />engineered for speed
           </h1>
           <p className="col-span-12 text-sm leading-normal text-[#524f49] sm:text-base md:col-span-6 md:col-start-7">
-            PDFForge is an open-standard, browser-native document workspace created to replace bloated desktop software and untrusted cloud converter services with 100% local WebAssembly computation.
+            SASU PDF is an open-standard, browser-native document workspace created to replace bloated desktop software and untrusted cloud converter services with 100% local WebAssembly computation.
           </p>
         </header>
 
@@ -48,7 +48,7 @@ export default function AboutPage() {
               </div>
               <h2 className="text-xl font-normal text-[#0f0e0d]">Why Local Execution Matters</h2>
               <p className="text-xs sm:text-sm text-[#524f49] leading-relaxed">
-                Traditional PDF editors upload your sensitive legal, medical, and financial documents to remote cloud servers. PDFForge processes every byte strictly in your browser tab's RAM sandbox, keeping your documents confidential by physical impossibility of cloud exposure.
+                Traditional PDF editors upload your sensitive legal, medical, and financial documents to remote cloud servers. SASU PDF processes every byte strictly in your browser tab's RAM sandbox, keeping your documents confidential by physical impossibility of cloud exposure.
               </p>
             </div>
             <div className="pt-4 border-t border-[#e5e5e3] flex items-center gap-2 text-xs font-mono text-[#524f49]">
@@ -82,14 +82,14 @@ export default function AboutPage() {
         <div className="space-y-6">
           <header className="space-y-2">
             <p className="text-xs font-mono uppercase tracking-wider text-[#524f49]">Architecture Comparison</p>
-            <h2 className="text-2xl sm:text-3xl font-normal text-[#0f0e0d]">Cloud-Based vs. PDFForge</h2>
+            <h2 className="text-2xl sm:text-3xl font-normal text-[#0f0e0d]">Cloud-Based vs. SASU PDF</h2>
           </header>
 
           <div className="rounded-xl border border-[#e5e5e3] bg-white overflow-hidden">
             <div className="grid grid-cols-12 bg-[#f2f1f0] p-4 text-xs font-mono text-[#0f0e0d] border-b border-[#e5e5e3] font-bold">
               <div className="col-span-4">Capability / Dimension</div>
               <div className="col-span-4">Legacy Cloud PDF SaaS</div>
-              <div className="col-span-4">PDFForge WebAssembly Suite</div>
+              <div className="col-span-4">SASU PDF WebAssembly Suite</div>
             </div>
 
             <div className="divide-y divide-[#e5e5e3] text-xs text-[#524f49]">
@@ -131,7 +131,7 @@ export default function AboutPage() {
         {/* CTA Banner */}
         <div className="rounded-2xl border border-[#e5e5e3] bg-white text-[#0f0e0d] p-8 sm:p-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
           <div className="space-y-2 max-w-xl">
-            <h2 className="text-2xl sm:text-3xl font-medium text-[#0f0e0d]">Experience PDFForge Studio</h2>
+            <h2 className="text-2xl sm:text-3xl font-medium text-[#0f0e0d]">Experience SASU PDF Studio</h2>
             <p className="text-xs sm:text-sm text-[#524f49]">
               Edit, annotate, sign, and convert PDF documents directly in your browser.
             </p>

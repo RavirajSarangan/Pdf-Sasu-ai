@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { PageNumbersTool } from "@/components/tools/PageNumbersTool";
 
 export const metadata: Metadata = {
-  title: "Add Page Numbers to PDF - Free Online | PDFForge",
+  title: "Add Page Numbers to PDF - Free Online | SASU PDF",
   description: "Easily add page numbers, counts, and headers to your PDF documents. Select positions, formatting, and numbering offset.",
 };
 

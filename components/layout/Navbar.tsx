@@ -52,7 +52,7 @@ export function Navbar() {
           <div className="h-7 w-7 rounded-lg bg-[#0f0e0d] flex items-center justify-center text-white">
             <FileText className="h-4 w-4" />
           </div>
-          <span className="text-lg font-semibold text-[#0f0e0d] tracking-[-0.015em]">PDFForge</span>
+          <span className="text-lg font-semibold text-[#0f0e0d] tracking-[-0.015em]">SASU PDF</span>
         </Link>
 
         {/* Center Links */}

@@ -1,7 +1,7 @@
 import { CompressPdfTool } from "@/components/tools/CompressPdfTool";
 
 export const metadata = {
-  title: "Compress PDF Online Free — PDFForge",
+  title: "Compress PDF Online Free — SASU PDF",
   description: "Reduce PDF file size locally without uploading your documents to cloud servers.",
 };
 

@@ -43,19 +43,19 @@ export function LandingPage() {
 
   const faqs = [
     {
-      q: "How does PDFForge handle data privacy and security?",
-      a: "PDFForge is architected with a strict client-side execution model. All PDF parsing, rasterization, OCR recognition, vector editing, and cryptographic hashing execute locally in your browser's WebAssembly sandbox. No document bytes are ever uploaded or transmitted across external networks.",
+      q: "How does SASU PDF handle data privacy and security?",
+      a: "SASU PDF is architected with a strict client-side execution model. All PDF parsing, rasterization, OCR recognition, vector editing, and cryptographic hashing execute locally in your browser's WebAssembly sandbox. No document bytes are ever uploaded or transmitted across external networks.",
     },
     {
       q: "Which PDF operations and formats are supported?",
-      a: "PDFForge supports full multi-page visual editing, freehand signatures (perfect-freehand), text extraction (Tesseract.js OCR), 1D/2D Barcodes (Code 128, EAN-13, UPC, QR), page rotation, reordering, splitting, merging, image bundling, and document watermarking.",
+      a: "SASU PDF supports full multi-page visual editing, freehand signatures (perfect-freehand), text extraction (Tesseract.js OCR), 1D/2D Barcodes (Code 128, EAN-13, UPC, QR), page rotation, reordering, splitting, merging, image bundling, and document watermarking.",
     },
     {
-      q: "Is PDFForge completely free with no hidden fees?",
-      a: "Yes. Because PDFForge utilizes local CPU computation rather than metered cloud compute APIs, the entire application is 100% free to use with zero export watermarks and no subscription paywalls.",
+      q: "Is SASU PDF completely free with no hidden fees?",
+      a: "Yes. Because SASU PDF utilizes local CPU computation rather than metered cloud compute APIs, the entire application is 100% free to use with zero export watermarks and no subscription paywalls.",
     },
     {
-      q: "Does PDFForge work offline without internet?",
+      q: "Does SASU PDF work offline without internet?",
       a: "Yes. Once the initial application assets load, the core PDF engine (PDF.js, pdf-lib, Tesseract worker) is stored in browser cache and operates fully without an active internet connection.",
     },
   ];
@@ -77,7 +77,7 @@ export function LandingPage() {
                 href="/editor"
                 className="inline-flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900 transition-colors mb-6 group w-fit"
               >
-                <span>Introducing PDFForge: The browser-native PDF studio</span>
+                <span>Introducing SASU PDF: The browser-native PDF studio</span>
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
 
@@ -123,7 +123,7 @@ export function LandingPage() {
               <div className="absolute top-8 left-8 sm:top-12 sm:left-12 lg:left-16 right-0 bottom-0 rounded-tl-xl overflow-hidden p-[1.5px] bg-gradient-to-br from-white/80 via-white/30 to-white/60 backdrop-blur-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.4)_inset] ring-1 ring-white/40">
                 <div className="relative w-full h-full rounded-tl-[10px] overflow-hidden bg-[#0f0e0d]">
                   <img
-                    alt="PDFForge Dashboard preview"
+                    alt="SASU PDF Dashboard preview"
                     src="/dashboard.png"
                     className="object-cover object-left-top w-full h-full"
                   />
@@ -177,12 +177,12 @@ export function LandingPage() {
       <section className="border-t border-[#e5e5e3] bg-[#fafaf9] py-16 sm:py-20 md:py-24 lg:py-28" id="why-radius">
         <div className="mx-auto max-w-[1500px] px-4 sm:px-6 md:px-8 lg:px-12 space-y-12">
           <header className="grid grid-cols-12 gap-x-4 gap-y-4 sm:gap-x-6 md:gap-x-8">
-            <p className="col-span-12 text-sm font-normal text-[#524f49] sm:text-base">Why PDFForge?</p>
+            <p className="col-span-12 text-sm font-normal text-[#524f49] sm:text-base">Why SASU PDF?</p>
             <h2 className="col-span-12 text-2xl font-normal leading-[1.2] tracking-[-0.015em] text-[#0f0e0d] sm:text-3xl md:col-span-5 md:text-4xl lg:text-[2.4rem]">
               The core document workspace<br />that grows with your needs
             </h2>
             <p className="col-span-12 text-sm leading-normal text-[#524f49] sm:text-base md:col-span-6 md:col-start-7">
-              Other PDF editors live in remote server queues, charging per-page API fees and exposing sensitive documents. PDFForge brings professional manipulation directly into your local browser sandbox, keeping your operations fully integrated and private.
+              Other PDF editors live in remote server queues, charging per-page API fees and exposing sensitive documents. SASU PDF brings professional manipulation directly into your local browser sandbox, keeping your operations fully integrated and private.
             </p>
           </header>
 
@@ -273,7 +273,7 @@ export function LandingPage() {
                             <span className="text-[10px] font-normal text-[#6e6a65] sm:text-[11px]">9:14</span>
                           </div>
                           <p className="text-[11px] leading-normal text-[#524f49] sm:text-xs md:text-sm">
-                            <span className="font-medium text-[#0f0e0d]">@PDFForge</span> extract text from scanned agreement and stamp approved watermark
+                            <span className="font-medium text-[#0f0e0d]">@SASU PDF</span> extract text from scanned agreement and stamp approved watermark
                           </p>
                         </div>
                       </div>
@@ -284,7 +284,7 @@ export function LandingPage() {
                         </div>
                         <div className="flex min-w-0 flex-col">
                           <div className="flex items-baseline gap-1.5 text-[11px] font-medium text-[#0f0e0d] sm:text-xs md:text-sm">
-                            PDFForge
+                            SASU PDF
                             <span className="text-[10px] font-normal text-[#6e6a65] sm:text-[11px]">9:14</span>
                           </div>
                           <p className="text-[11px] leading-normal text-[#524f49] sm:text-xs md:text-sm">
@@ -320,7 +320,7 @@ export function LandingPage() {
                   Collaborate across Canvas, Scans, and Files
                 </h3>
                 <p className="text-sm leading-normal text-[#524f49] sm:text-base">
-                  Whether you drop in raw image scans, stamp dynamic watermarks, or reorder pages, PDFForge keeps your document history, layers, and undo stack fully synchronized in IndexedDB.
+                  Whether you drop in raw image scans, stamp dynamic watermarks, or reorder pages, SASU PDF keeps your document history, layers, and undo stack fully synchronized in IndexedDB.
                 </p>
               </div>
             </article>
@@ -474,7 +474,7 @@ export function LandingPage() {
                   Set up a task.<br />Watch it run locally.
                 </h2>
                 <p className="text-sm leading-normal text-[#524f49] sm:text-base">
-                  Define tasks in plain English. PDFForge plans the execution steps, scans files, modifies code, and runs validations autonomously.
+                  Define tasks in plain English. SASU PDF plans the execution steps, scans files, modifies code, and runs validations autonomously.
                 </p>
               </header>
 
@@ -567,7 +567,7 @@ export function LandingPage() {
             <div className="flex items-center justify-between border-b border-[#e5e5e3] pb-3">
               <div className="flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-blue-600" />
-                <span className="text-sm font-medium text-[#0f0e0d]">PDFForge Synthesis · Research Report</span>
+                <span className="text-sm font-medium text-[#0f0e0d]">SASU PDF Synthesis · Research Report</span>
               </div>
               <span className="text-[11px] font-mono text-[#524f49]">Sourced from local files & memory</span>
             </div>
@@ -790,7 +790,7 @@ export function LandingPage() {
             <article className="flex flex-col gap-3 rounded-xl border border-[#e5e5e3] bg-white p-6">
               <h3 className="text-base font-medium text-[#0f0e0d]">MCP interface</h3>
               <p className="text-xs text-[#524f49] leading-relaxed">
-                Connect PDFForge to Claude web, Claude Code, Cursor, or any MCP-compatible host. Every workspace action is available over standard protocols.
+                Connect SASU PDF to Claude web, Claude Code, Cursor, or any MCP-compatible host. Every workspace action is available over standard protocols.
               </p>
             </article>
 
