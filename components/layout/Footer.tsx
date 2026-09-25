@@ -1,36 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import { FileText, Sparkles, CheckCircle2, Bot } from "lucide-react";
+import { FileText } from "lucide-react";
 
 export function Footer() {
   return (
     <footer className="border-t border-[#e5e5e3] bg-white text-[#0f0e0d]">
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 md:px-8 lg:px-12 py-16 sm:py-20">
         
-        {/* Top Section: AI / LLM & Answer Engine Integration & Discovery Hub */}
-        <div className="mb-14 rounded-2xl border border-[#e5e5e3] bg-[#fafaf9] p-6 sm:p-8">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-[#e5e5e3]/80">
-            <div className="space-y-1.5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800">
-                <Sparkles className="h-3.5 w-3.5 text-emerald-600 animate-pulse" />
-                <span>Answer Engine & LLM Optimized (AEO)</span>
-              </div>
-              <h4 className="text-base font-semibold text-[#0f0e0d] tracking-tight">
-                Verified & Cited Across Next-Gen AI Models
-              </h4>
-              <p className="text-xs sm:text-sm text-[#524f49] max-w-2xl leading-relaxed">
-                PDFForge is indexed for real-time citations and agentic workflows across ChatGPT, Claude, Gemini, Grok, and Google AI Overviews.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2 text-xs text-[#524f49] bg-white px-3.5 py-2 rounded-xl border border-[#e5e5e3] shadow-xs">
-              <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
-              <span>100% Client-Side Private • Structured Schema 2.0</span>
-            </div>
-          </div>
-
-          {/* AI & LLM Brand Badges */}
-          <div className="pt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 sm:gap-4">
+        {/* AI / LLM & Answer Engine Logos */}
+        <div className="mb-14 rounded-2xl border border-[#e5e5e3] bg-[#fafaf9] p-4 sm:p-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 sm:gap-4">
             {/* ChatGPT */}
             <div className="flex items-center gap-3 p-3 rounded-xl bg-white border border-[#e5e5e3] shadow-2xs hover:border-[#0f0e0d]/30 hover:shadow-xs transition-all group">
               <div className="h-8 w-8 rounded-lg bg-[#10a37f]/10 flex items-center justify-center text-[#10a37f] shrink-0 group-hover:scale-105 transition-transform">
